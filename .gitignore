@@ -1,0 +1,9 @@
+
+**/logs
+**/dumps
+**/audio_examples
+**/.idea
+**/__pycache__
+**/.ipynb_checkpoints
+**/Figures
+/test_metrics/Results.xlsx
