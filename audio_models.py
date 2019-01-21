@@ -1,6 +1,6 @@
 import tensorflow as tf
 import model_functions as mf
-from SegCaps import capsule_layers
+#from SegCaps import capsule_layers
 from keras import layers
 
 
