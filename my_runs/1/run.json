@@ -1,0 +1,100 @@
+{
+  "artifacts": [],
+  "command": "do_experiment",
+  "experiment": {
+    "base_dir": "/home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask",
+    "dependencies": [
+      "numpy==1.15.4",
+      "sacred==0.7.4",
+      "tensorflow-gpu==1.11.0"
+    ],
+    "mainfile": "main.py",
+    "name": "UNet_Speech_Separation",
+    "repositories": [],
+    "sources": [
+      [
+        "audio_models.py",
+        "_sources/audio_models_9f3775a88b5ac45d0539d20dfed413d1.py"
+      ],
+      [
+        "dataset.py",
+        "_sources/dataset_653e01f066db941b29e7850b5c3ef9a6.py"
+      ],
+      [
+        "main.py",
+        "_sources/main_fdc313542e1f7c75bd1031b4e45333a9.py"
+      ],
+      [
+        "train.py",
+        "_sources/train_caf899dd5a3dd539ae52b8372ee4b114.py"
+      ]
+    ]
+  },
+  "fail_trace": [
+    "Traceback (most recent call last):\n",
+    "  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/sacred/config/captured_function.py\", line 46, in captured_function\n    result = wrapped(*args, **kwargs)\n",
+    "  File \"main.py\", line 154, in do_experiment\n    test_count, experiment_id)\n",
+    "  File \"/home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/test.py\", line 15, in test\n    os.mkdir(dump_folder)\n",
+    "FileNotFoundError: [Errno 2] No such file or directory: 'dumps/1'\n"
+  ],
+  "heartbeat": "2019-01-21T23:26:07.272512",
+  "host": {
+    "ENV": {},
+    "cpu": "AMD Ryzen 7 1700 Eight-Core Processor",
+    "gpus": {
+      "driver_version": "396.44",
+      "gpus": [
+        {
+          "model": "GeForce GTX 1080 Ti",
+          "persistence_mode": false,
+          "total_memory": 11177
+        },
+        {
+          "model": "GeForce GTX 1080 Ti",
+          "persistence_mode": false,
+          "total_memory": 11178
+        }
+      ]
+    },
+    "hostname": "africa",
+    "os": [
+      "Linux",
+      "Linux-4.15.0-43-generic-x86_64-with-Ubuntu-16.04-xenial"
+    ],
+    "python_version": "3.5.2"
+  },
+  "meta": {
+    "command": "do_experiment",
+    "options": {
+      "--beat_interval": null,
+      "--capture": null,
+      "--comment": null,
+      "--debug": false,
+      "--enforce_clean": false,
+      "--file_storage": null,
+      "--force": false,
+      "--help": false,
+      "--loglevel": null,
+      "--mongo_db": null,
+      "--name": null,
+      "--pdb": false,
+      "--print_config": false,
+      "--priority": null,
+      "--queue": false,
+      "--sql": null,
+      "--tiny_db": null,
+      "--unobserved": false,
+      "COMMAND": null,
+      "UPDATE": [
+        "model_config.data_type=mag_phase"
+      ],
+      "help": false,
+      "with": true
+    }
+  },
+  "resources": [],
+  "result": null,
+  "start_time": "2019-01-21T17:15:27.569847",
+  "status": "FAILED",
+  "stop_time": "2019-01-21T23:26:07.280257"
+}

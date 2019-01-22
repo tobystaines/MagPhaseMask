@@ -1,0 +1,49 @@
+INFO - UNet_Speech_Separation - Running command 'do_experiment'
+INFO - UNet_Speech_Separation - Started run with ID "2"
+Experiment ID: 2
+Preparing dataset
+Dataset ready
+2019-01-22 09:06:34.157177: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2019-01-22 09:06:34.819505: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:964] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2019-01-22 09:06:34.820631: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1411] Found device 0 with properties: 
+name: GeForce GTX 1080 Ti major: 6 minor: 1 memoryClockRate(GHz): 1.645
+pciBusID: 0000:26:00.0
+totalMemory: 10.92GiB freeMemory: 10.76GiB
+2019-01-22 09:06:34.820651: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1490] Adding visible gpu devices: 0
+2019-01-22 09:06:35.561610: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] Device interconnect StreamExecutor with strength 1 edge matrix:
+2019-01-22 09:06:35.561664: I tensorflow/core/common_runtime/gpu/gpu_device.cc:977]      0 
+2019-01-22 09:06:35.561677: I tensorflow/core/common_runtime/gpu/gpu_device.cc:990] 0:   N 
+2019-01-22 09:06:35.562373: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1103] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 10404 MB memory) -> physical GPU (device: 0, name: GeForce GTX 1080 Ti, pci bus id: 0000:26:00.0, compute capability: 6.1)
+Session started
+Iterators created
+Creating model
+Loading checkpoint
+INFO:tensorflow:Restoring parameters from /home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/checkpoints/1/1-7
+INFO - tensorflow - Restoring parameters from /home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/checkpoints/1/1-7
+Starting training
+Training complete after 0 epochs.
+Finished requested number of epochs.
+Final validation loss: 1
+This was the best validation loss achieved
+Starting testing
+2019-01-22 09:06:44.601033:	Entering test loop
+2019-01-22 09:06:54.939916: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:98] Filling up shuffle buffer (this may take a while): 347 of 1000
+2019-01-22 09:07:04.937844: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:98] Filling up shuffle buffer (this may take a while): 761 of 1000
+2019-01-22 09:07:14.821608: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:136] Shuffle buffer filled.
+2019-01-22 09:07:19.953040:	Testing iteration: 0, Loss: 0.0019915474113076925
+2019-01-22 09:10:07.047885: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:98] Filling up shuffle buffer (this may take a while): 327 of 1000
+2019-01-22 09:10:17.038232: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:98] Filling up shuffle buffer (this may take a while): 760 of 1000
+2019-01-22 09:10:23.197055: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:136] Shuffle buffer filled.
+2019-01-22 09:13:04.777221: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:98] Filling up shuffle buffer (this may take a while): 295 of 1000
+2019-01-22 09:13:14.788373: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:98] Filling up shuffle buffer (this may take a while): 720 of 1000
+2019-01-22 09:13:21.506745: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:136] Shuffle buffer filled.
+2019-01-22 09:16:07.571290: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:98] Filling up shuffle buffer (this may take a while): 380 of 1000
+2019-01-22 09:16:17.457495: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:98] Filling up shuffle buffer (this may take a while): 799 of 1000
+2019-01-22 09:16:22.275507: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:136] Shuffle buffer filled.
+2019-01-22 09:16:38.969696:	Testing iteration: 200, Loss: 0.0019071775022894144
+Test pass complete
+Mean loss over test set: 0.001854556460882752
+Data saved to dumps/2 for later audio metric calculation
+2019-01-22 09:19:01.774393:
+	All done with experiment 2!
+	Final test loss: 0.001854556460882752
