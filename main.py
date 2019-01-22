@@ -20,13 +20,13 @@ ex.observers.append(FileStorageObserver.create('my_runs'))
 def cfg():
     model_config = {'model_variant': 'unet',  # The type of model to use, from ['unet', capsunet', basic_capsnet',
                                               # 'basic_convnet']
-                    'data_type': 'mag',  # From [' mag', 'mag_phase', 'mag_phase_diff', 'real_imag',
+                    'data_type': 'mag_phase',  # From [' mag', 'mag_phase', 'mag_phase_diff', 'real_imag',
                                                     # 'mag_real_imag', 'complex_to_mag_phase']
                     'phase_weight': 0.005,  # When using a model which learns to estimate phase, defines how much
                                             # weight phase loss should be given against magnitude loss
                     'initialisation_test': False,  # Whether or not to calculate test metrics before training
-                    'loading': False,  # Whether to load an existing checkpoint
-                    'checkpoint_to_load': "169/169-6",  # Checkpoint format: run/run-step
+                    'loading': True,  # Whether to load an existing checkpoint
+                    'checkpoint_to_load': "1/1-7",  # Checkpoint format: run/run-step
                     'saving': True,  # Whether to take checkpoints
                     'save_by_epochs': True,  # Checkpoints at end of each epoch or every 'save_iters'?
                     'save_iters': 10000,  # Number of training iterations between checkpoints
@@ -47,7 +47,7 @@ def cfg():
                     'batch_size': 50,  # Number of patches in each batch
                     'n_shuffle': 1000,  # Number of patches buffered before batching
                     'learning_rate': 0.0001,  # The learning rate to be used by the model
-                    'epochs': 8,  # Number of full passes through the dataset to train for
+                    'epochs': 0,  # Number of full passes through the dataset to train for
                     'normalise_mag': True,  # Are magnitude spectrograms normalised in pre-processing?
                     'GPU': '0'
                     }
