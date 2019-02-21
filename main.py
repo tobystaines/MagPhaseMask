@@ -18,9 +18,7 @@ ex.observers.append(FileStorageObserver.create('my_runs'))
 
 @ex.config
 def cfg():
-    model_config = {'model_variant': 'unet',  # The type of model to use, from ['unet', capsunet', basic_capsnet',
-                                              # 'basic_convnet']
-                    'data_type': 'mag_phase',  # From [' mag', 'mag_phase', 'mag_phase_diff', 'real_imag',
+    model_config = {'data_type': 'mag_phase',  # From [' mag', 'mag_phase', 'mag_phase_diff', 'real_imag',
                                                     # 'mag_real_imag', 'complex_to_mag_phase']
                     'phase_weight': 0.005,  # When using a model which learns to estimate phase, defines how much
                                             # weight phase loss should be given against magnitude loss
@@ -34,10 +32,6 @@ def cfg():
                     'val_by_epochs': True,  # Validation at end of each epoch or every 'val_iters'?
                     'val_iters': 50000,  # Number of training iterations between validation checks,
                     'num_worse_val_checks': 3,  # Number of successively worse validation checks before early stopping,
-                    'dataset': 'CHiME',  # Choice from ['CHiME', 'LibriSpeech_s', 'LibriSpeech_m',
-                                         #              'LibriSpeech_l', 'CHiME and LibriSpeech_s',
-                                         #              'CHiME and LibriSpeech_m', 'CHiME and LibriSpeech_l']
-                    'local_run': False,  # Whether experiment is running on laptop or server
                     'sample_rate': 16384,  # Desired sample rate of audio. Input will be resampled to this
                     'n_fft': 1024,  # Number of samples in each fourier transform
                     'fft_hop': 256,  # Number of samples between the start of each fourier transform
@@ -49,19 +43,11 @@ def cfg():
                     'learning_rate': 0.0001,  # The learning rate to be used by the model
                     'epochs': 0,  # Number of full passes through the dataset to train for
                     'normalise_mag': True,  # Are magnitude spectrograms normalised in pre-processing?
-                    'GPU': '0'
+                    'GPU': '0',
+                    'chime_data_root': '/home/enterprise.internal.city.ac.uk/acvn728/NewCHiME/',
+                    'model_base_dir': '/home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/checkpoints',
+                    'log_dir':'logs/ssh'
                     }
-
-    if model_config['local_run']:  # Data and Checkpoint directories on my laptop
-        model_config['data_root'] = 'C:/Users/Toby/MSc_Project/Test_Audio/CHiME/'
-        model_config['model_base_dir'] = 'C:/Users/Toby/MSc_Project/MScFinalProjectCheckpoints'
-        model_config['log_dir'] = 'logs/local'
-
-    else:  # Data and Checkpoint directories on the uni server
-        model_config['chime_data_root'] = '/home/enterprise.internal.city.ac.uk/acvn728/NewCHiME/'
-        model_config['librispeech_data_root'] = '/data/Speech_Data/LibriSpeech/'
-        model_config['model_base_dir'] = '/home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/checkpoints'
-        model_config['log_dir'] = 'logs/ssh'
 
 
 @ex.automain
@@ -123,8 +109,8 @@ def do_experiment(model_config):
         voice_input = voice_spec[:, :, :-1, :]
 
     model = audio_models.MagnitudeModel(mixed_input, voice_input, mixed_phase, mixed_audio, voice_audio, background_audio,
-                                        model_config['model_variant'], is_training, model_config['learning_rate'],
-                                        model_config['data_type'], model_config['phase_weight'], name='Magnitude_Model')
+                                        is_training, model_config['learning_rate'], model_config['data_type'],
+                                        model_config['phase_weight'], name='Magnitude_Model')
 
     sess.run(tf.global_variables_initializer())
 

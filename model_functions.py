@@ -67,6 +67,13 @@ def l1_loss(x, y):
     return tf.reduce_mean(tf.abs(x - y))
 
 
+def approx_min(X):
+    rho = 10
+    sum_term = tf.map_fn(lambda x: tf.exp(-rho*x), X)
+    approximate_min = -(1/rho)*tf.log(tf.reduce_sum(sum_term, axis=0))
+    return approximate_min
+
+
 def l1_phase_loss(y, y_hat):
     """
     Calculates the l1 loss between two phase spectrograms, correcting for the circularity of phase. The true difference
@@ -80,7 +87,7 @@ def l1_phase_loss(y, y_hat):
     add_2_pi_diff = tf.abs(y_hat - (y + 2 * pi))
     minus_2_pi_diff = tf.abs(y_hat - (y - 2 * pi))
 
-    return tf.reduce_mean(tf.minimum(original_diff, tf.minimum(add_2_pi_diff, minus_2_pi_diff)))
+    return tf.reduce_mean(approx_min(tf.stack([original_diff, add_2_pi_diff, minus_2_pi_diff])))
 
 
 def phase_difference(x, y):
