@@ -20,7 +20,7 @@ ex.observers.append(FileStorageObserver.create('my_runs'))
 def cfg():
     model_config = {'data_type': 'mag_phase',  # From [' mag', 'mag_phase', 'mag_phase_diff', 'real_imag',
                                                     # 'mag_real_imag', 'complex_to_mag_phase']
-                    'phase_weight': 0.005,  # When using a model which learns to estimate phase, defines how much
+                    'phase_weight': 0.5,  # When using a model which learns to estimate phase, defines how much
                                             # weight phase loss should be given against magnitude loss
                     'initialisation_test': False,  # Whether or not to calculate test metrics before training
                     'loading': False,  # Whether to load an existing checkpoint
@@ -44,7 +44,7 @@ def cfg():
                     'epochs': 8,  # Number of full passes through the dataset to train for
                     'normalise_mag': True,  # Are magnitude spectrograms normalised in pre-processing?
                     'GPU': '0',
-                    'phase_loss_masking': True,
+                    'phase_loss_masking': False,
                     'phase_loss_approximation': True,
                     'chime_data_root': '/home/enterprise.internal.city.ac.uk/acvn728/NewCHiME/',
                     'model_base_dir': '/home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/checkpoints',
