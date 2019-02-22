@@ -23,7 +23,7 @@ def cfg():
                     'phase_weight': 0.005,  # When using a model which learns to estimate phase, defines how much
                                             # weight phase loss should be given against magnitude loss
                     'initialisation_test': False,  # Whether or not to calculate test metrics before training
-                    'loading': True,  # Whether to load an existing checkpoint
+                    'loading': False,  # Whether to load an existing checkpoint
                     'checkpoint_to_load': "1/1-7",  # Checkpoint format: run/run-step
                     'saving': True,  # Whether to take checkpoints
                     'save_by_epochs': True,  # Checkpoints at end of each epoch or every 'save_iters'?
@@ -41,9 +41,11 @@ def cfg():
                     'batch_size': 50,  # Number of patches in each batch
                     'n_shuffle': 1000,  # Number of patches buffered before batching
                     'learning_rate': 0.0001,  # The learning rate to be used by the model
-                    'epochs': 0,  # Number of full passes through the dataset to train for
+                    'epochs': 8,  # Number of full passes through the dataset to train for
                     'normalise_mag': True,  # Are magnitude spectrograms normalised in pre-processing?
                     'GPU': '0',
+                    'phase_loss_masking': True,
+                    'phase_loss_approximation': True,
                     'chime_data_root': '/home/enterprise.internal.city.ac.uk/acvn728/NewCHiME/',
                     'model_base_dir': '/home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/checkpoints',
                     'log_dir':'logs/ssh'
@@ -110,7 +112,8 @@ def do_experiment(model_config):
 
     model = audio_models.MagnitudeModel(mixed_input, voice_input, mixed_phase, mixed_audio, voice_audio, background_audio,
                                         is_training, model_config['learning_rate'], model_config['data_type'],
-                                        model_config['phase_weight'], name='Magnitude_Model')
+                                        model_config['phase_weight'], model_config['phase_loss_masking'],
+                                        model_config['phase_loss_approximation'], name='Magnitude_Model')
 
     sess.run(tf.global_variables_initializer())
 

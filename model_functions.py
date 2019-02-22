@@ -74,20 +74,29 @@ def approx_min(X):
     return approximate_min
 
 
-def l1_phase_loss(y, y_hat):
+def l1_phase_loss(y, y_hat, approximate=True, loss_masking=False, mag_y_hat=None):
     """
     Calculates the l1 loss between two phase spectrograms, correcting for the circularity of phase. The true difference
     between each element of y_hat (the estimate) and y (the true value) is the closest to 0 of y_hat - y, y_hat - (y + 2pi) and y_hat - (y - 2pi).
     :param y_hat: 2D tensor, a phase spectrogram in radians
     :param y: 2D tensor, a phase spectrogram in radians
+    :param approximate:
+    :param loss_masking:
+    :param mag_y_hat:
     :return: l1 loss between y_hat and y
     """
     pi = tf.constant(math.pi)
     original_diff = tf.abs(y_hat - y)
     add_2_pi_diff = tf.abs(y_hat - (y + 2 * pi))
     minus_2_pi_diff = tf.abs(y_hat - (y - 2 * pi))
-
-    return tf.reduce_mean(approx_min(tf.stack([original_diff, add_2_pi_diff, minus_2_pi_diff])))
+    if approximate and loss_masking:
+        return tf.reduce_mean(mag_y_hat * approx_min(tf.stack([original_diff, add_2_pi_diff, minus_2_pi_diff])))
+    elif approximate:
+        return tf.reduce_mean(approx_min(tf.stack([original_diff, add_2_pi_diff, minus_2_pi_diff])))
+    elif loss_masking:
+        return tf.reduce_mean(mag_y_hat * tf.minimum(original_diff, tf.minimum(add_2_pi_diff, minus_2_pi_diff)))
+    else:
+        return tf.reduce_mean(tf.minimum(original_diff, tf.minimum(add_2_pi_diff, minus_2_pi_diff)))
 
 
 def phase_difference(x, y):
@@ -111,21 +120,3 @@ def phase_difference(x, y):
 
     return second_corrected_diff
 
-
-def l1_masked_phase_loss(y_hat, y, mag_y_hat):
-    """
-    Calculates the l1 loss between two phase spectrograms, correcting for the circularity of phase and masking with the
-    estimated magnitude. The true difference between each element of y_hat (the estimate) and y (the true value) is the
-    closest to 0 of y_hat - y, y_hat - (y + 2pi) and y_hat - (y - 2pi). Masking with the estimated magnitude aims to
-    focus the learning on the areas with larger magnitude, as these are where an audible difference will be.
-    :param y_hat: 2D tensor, a phase spectrogram in radians
-    :param y: 2D tensor, a phase spectrogram in radians
-    :param mag_y_hat: 2D tensor, a magnitude spectrogram
-    :return: l1 loss between y_hat and y
-    """
-    pi = tf.constant(math.pi)
-    original_diff = tf.abs(y_hat - y)
-    add_2_pi_diff = tf.abs(y_hat - (y + 2 * pi))
-    minus_2_pi_diff = tf.abs(y_hat - (y - 2 * pi))
-
-    return tf.reduce_mean(mag_y_hat * tf.minimum(original_diff, tf.minimum(add_2_pi_diff, minus_2_pi_diff)))
