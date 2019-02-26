@@ -20,7 +20,7 @@ ex.observers.append(FileStorageObserver.create('my_runs'))
 def cfg():
     model_config = {'data_type': 'mag_phase',  # From [' mag', 'mag_phase', 'mag_phase_diff', 'real_imag',
                                                     # 'mag_real_imag', 'complex_to_mag_phase']
-                    'phase_weight': 0.5,  # When using a model which learns to estimate phase, defines how much
+                    'phase_weight': 0.05,  # When using a model which learns to estimate phase, defines how much
                                             # weight phase loss should be given against magnitude loss
                     'initialisation_test': False,  # Whether or not to calculate test metrics before training
                     'loading': False,  # Whether to load an existing checkpoint
