@@ -1,0 +1,94 @@
+{
+  "artifacts": [],
+  "command": "do_experiment",
+  "experiment": {
+    "base_dir": "/home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask",
+    "dependencies": [
+      "numpy==1.15.4",
+      "sacred==0.7.4",
+      "tensorflow-gpu==1.11.0"
+    ],
+    "mainfile": "main.py",
+    "name": "UNet_Speech_Separation",
+    "repositories": [],
+    "sources": [
+      [
+        "audio_models.py",
+        "_sources/audio_models_cab966ffdd0245e4f94bd47f4a286367.py"
+      ],
+      [
+        "dataset.py",
+        "_sources/dataset_f18a815f3e3465bfee9c68b7ba52fcd5.py"
+      ],
+      [
+        "main.py",
+        "_sources/main_bc1dc7f228adc60cff3bf68c0bd8afca.py"
+      ],
+      [
+        "train.py",
+        "_sources/train_caf899dd5a3dd539ae52b8372ee4b114.py"
+      ]
+    ]
+  },
+  "heartbeat": "2019-02-27T14:58:45.763052",
+  "host": {
+    "ENV": {},
+    "cpu": "AMD Ryzen 7 1700 Eight-Core Processor",
+    "gpus": {
+      "driver_version": "396.44",
+      "gpus": [
+        {
+          "model": "GeForce GTX 1080 Ti",
+          "persistence_mode": false,
+          "total_memory": 11177
+        },
+        {
+          "model": "GeForce GTX 1080 Ti",
+          "persistence_mode": false,
+          "total_memory": 11178
+        }
+      ]
+    },
+    "hostname": "europe",
+    "os": [
+      "Linux",
+      "Linux-4.15.0-45-generic-x86_64-with-Ubuntu-16.04-xenial"
+    ],
+    "python_version": "3.5.2"
+  },
+  "meta": {
+    "command": "do_experiment",
+    "options": {
+      "--beat_interval": null,
+      "--capture": null,
+      "--comment": null,
+      "--debug": false,
+      "--enforce_clean": false,
+      "--file_storage": null,
+      "--force": false,
+      "--help": false,
+      "--loglevel": null,
+      "--mongo_db": null,
+      "--name": null,
+      "--pdb": false,
+      "--print_config": false,
+      "--priority": null,
+      "--queue": false,
+      "--sql": null,
+      "--tiny_db": null,
+      "--unobserved": false,
+      "COMMAND": null,
+      "UPDATE": [
+        "model_config.phase_loss_approximation=False",
+        "model_config.phase_loss_masking=True"
+      ],
+      "help": false,
+      "with": true
+    }
+  },
+  "resources": [],
+  "result": null,
+  "start_time": "2019-02-27T14:44:20.723180",
+  "status": "COMPLETED",
+  "stop_time": "2019-02-27T14:58:45.761287"
+}

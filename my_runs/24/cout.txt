@@ -1,0 +1,54 @@
+INFO - UNet_Speech_Separation - Running command 'do_experiment'
+INFO - UNet_Speech_Separation - Started run with ID "24"
+Experiment ID: 24
+Preparing dataset
+Dataset ready
+2019-02-27 14:45:36.834012: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2019-02-27 14:45:37.743948: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:964] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2019-02-27 14:45:37.744717: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1411] Found device 0 with properties: 
+name: GeForce GTX 1080 Ti major: 6 minor: 1 memoryClockRate(GHz): 1.645
+pciBusID: 0000:26:00.0
+totalMemory: 10.92GiB freeMemory: 10.76GiB
+2019-02-27 14:45:37.744732: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1490] Adding visible gpu devices: 0
+2019-02-27 14:45:38.031938: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] Device interconnect StreamExecutor with strength 1 edge matrix:
+2019-02-27 14:45:38.031977: I tensorflow/core/common_runtime/gpu/gpu_device.cc:977]      0 
+2019-02-27 14:45:38.031983: I tensorflow/core/common_runtime/gpu/gpu_device.cc:990] 0:   N 
+2019-02-27 14:45:38.032230: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1103] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 10404 MB memory) -> physical GPU (device: 0, name: GeForce GTX 1080 Ti, pci bus id: 0000:26:00.0, compute capability: 6.1)
+Session started
+Iterators created
+Creating model
+Starting training
+2019-02-27 14:45:56.641183: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:98] Filling up shuffle buffer (this may take a while): 185 of 1000
+2019-02-27 14:46:06.810450: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:98] Filling up shuffle buffer (this may take a while): 557 of 1000
+2019-02-27 14:46:16.578095: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:136] Shuffle buffer filled.
+Error: cost = nan
+Loading latest checkpoint
+INFO:tensorflow:Restoring parameters from /home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/checkpoints/1/1-7
+INFO - tensorflow - Restoring parameters from /home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/checkpoints/1/1-7
+Training complete after 0 epochs.
+Finished requested number of epochs.
+Final validation loss: 1
+This was the best validation loss achieved
+Starting testing
+2019-02-27 14:46:24.294878:	Entering test loop
+2019-02-27 14:46:34.585386: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:98] Filling up shuffle buffer (this may take a while): 386 of 1000
+2019-02-27 14:46:44.611741: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:98] Filling up shuffle buffer (this may take a while): 807 of 1000
+2019-02-27 14:46:49.323386: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:136] Shuffle buffer filled.
+2019-02-27 14:46:52.632136:	Testing iteration: 0, Loss: inf
+2019-02-27 14:49:38.494233: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:98] Filling up shuffle buffer (this may take a while): 386 of 1000
+2019-02-27 14:49:48.522918: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:98] Filling up shuffle buffer (this may take a while): 809 of 1000
+2019-02-27 14:49:53.201847: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:136] Shuffle buffer filled.
+2019-02-27 14:52:43.137670: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:98] Filling up shuffle buffer (this may take a while): 382 of 1000
+2019-02-27 14:52:53.174530: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:98] Filling up shuffle buffer (this may take a while): 798 of 1000
+2019-02-27 14:52:58.003915: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:136] Shuffle buffer filled.
+2019-02-27 14:55:53.533942: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:98] Filling up shuffle buffer (this may take a while): 352 of 1000
+2019-02-27 14:56:02.256624: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:98] Filling up shuffle buffer (this may take a while): 640 of 1000
+2019-02-27 14:56:11.158602: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:136] Shuffle buffer filled.
+2019-02-27 14:56:31.457824:	Testing iteration: 200, Loss: inf
+Test pass complete
+Mean loss over test set: inf
+Data saved to dumps/24 for later audio metric calculation
+2019-02-27 14:58:45.434464:
+	All done with experiment 24!
+	Final test loss: inf
+INFO - UNet_Speech_Separation - Completed after 0:14:25
