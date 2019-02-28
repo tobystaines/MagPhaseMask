@@ -92,9 +92,9 @@ def l1_phase_loss(y, y_hat, approximate=True, loss_masking=None, mag_y_hat=None)
     if loss_masking == 'binary':
         threshold = 3/256
         mask = tf.where(mag_y_hat > threshold, 1, 0)
-    if approximate and loss_masking == 'full':
+    if loss_masking == 'full' and approximate:
         return tf.reduce_mean(mag_y_hat * approx_min(tf.stack([original_diff, add_2_pi_diff, minus_2_pi_diff])))
-    elif approximate and loss_masking == 'binary':
+    elif loss_masking == 'binary' and approximate:
         return tf.reduce_mean(mask * approx_min(tf.stack([original_diff, add_2_pi_diff, minus_2_pi_diff])))
     elif approximate:
         return tf.reduce_mean(approx_min(tf.stack([original_diff, add_2_pi_diff, minus_2_pi_diff])))
