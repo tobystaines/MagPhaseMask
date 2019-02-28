@@ -74,7 +74,7 @@ def approx_min(X):
     return approximate_min
 
 
-def l1_phase_loss(y, y_hat, approximate=True, loss_masking=False, mag_y_hat=None):
+def l1_phase_loss(y, y_hat, approximate=True, loss_masking=None, mag_y_hat=None):
     """
     Calculates the l1 loss between two phase spectrograms, correcting for the circularity of phase. The true difference
     between each element of y_hat (the estimate) and y (the true value) is the closest to 0 of y_hat - y, y_hat - (y + 2pi) and y_hat - (y - 2pi).
@@ -89,12 +89,19 @@ def l1_phase_loss(y, y_hat, approximate=True, loss_masking=False, mag_y_hat=None
     original_diff = tf.abs(y_hat - y)
     add_2_pi_diff = tf.abs(y_hat - (y + 2 * pi))
     minus_2_pi_diff = tf.abs(y_hat - (y - 2 * pi))
-    if approximate and loss_masking:
+    if loss_masking == 'binary':
+        threshold = 3/256
+        mask = tf.where(mag_y_hat > threshold, 1, 0)
+    if approximate and loss_masking == 'full':
         return tf.reduce_mean(mag_y_hat * approx_min(tf.stack([original_diff, add_2_pi_diff, minus_2_pi_diff])))
+    elif approximate and loss_masking == 'binary':
+        return tf.reduce_mean(mask * approx_min(tf.stack([original_diff, add_2_pi_diff, minus_2_pi_diff])))
     elif approximate:
         return tf.reduce_mean(approx_min(tf.stack([original_diff, add_2_pi_diff, minus_2_pi_diff])))
-    elif loss_masking:
+    elif loss_masking == 'full':
         return tf.reduce_mean(mag_y_hat * tf.minimum(original_diff, tf.minimum(add_2_pi_diff, minus_2_pi_diff)))
+    elif loss_masking == 'binary':
+        return tf.reduce_mean(mask * tf.minimum(original_diff, tf.minimum(add_2_pi_diff, minus_2_pi_diff)))
     else:
         return tf.reduce_mean(tf.minimum(original_diff, tf.minimum(add_2_pi_diff, minus_2_pi_diff)))
 
