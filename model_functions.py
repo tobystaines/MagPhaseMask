@@ -68,7 +68,7 @@ def l1_loss(x, y):
 
 
 def approx_min(X):
-    rho = 100
+    rho = 10
     sum_term = tf.map_fn(lambda x: tf.exp(-rho*x), X)
     approximate_min = -(1/rho)*tf.log(tf.reduce_sum(sum_term, axis=0))
     return approximate_min
