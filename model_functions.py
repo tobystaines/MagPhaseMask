@@ -74,7 +74,7 @@ def approx_min(X):
     return approximate_min
 
 
-def l1_phase_loss(y, y_hat, approximate=True, loss_masking=None, mag_y_hat=None):
+def l1_phase_loss(y_hat, y, approximate=True, loss_masking=None, mag_y_hat=None):
     """
     Calculates the l1 loss between two phase spectrograms, correcting for the circularity of phase. The true difference
     between each element of y_hat (the estimate) and y (the true value) is the closest to 0 of y_hat - y, y_hat - (y + 2pi) and y_hat - (y - 2pi).

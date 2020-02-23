@@ -1,0 +1,8 @@
+pandas
+numpy
+tensorflow
+sacred
+librosa
+soundfile
+keras
+mir_eval

@@ -23,6 +23,7 @@ def cfg():
                     'phase_weight': 0.0005,  # When using a model which learns to estimate phase, defines how much
                                             # weight phase loss should be given against magnitude loss
                     'initialisation_test': False,  # Whether or not to calculate test metrics before training
+                    'completion_test': False,  # Whether ot not to calculate test metrics after training
                     'loading': False,  # Whether to load an existing checkpoint
                     'checkpoint_to_load': "1/1-7",  # Checkpoint format: run/run-step
                     'saving': True,  # Whether to take checkpoints
@@ -32,7 +33,7 @@ def cfg():
                     'val_by_epochs': True,  # Validation at end of each epoch or every 'val_iters'?
                     'val_iters': 50000,  # Number of training iterations between validation checks,
                     'num_worse_val_checks': 3,  # Number of successively worse validation checks before early stopping,
-                    'sample_rate': 16384,  # Desired sample rate of audio. Input will be resampled to this
+                    'sample_rate': 16000,  # Desired sample rate of audio. Input will be resampled to this
                     'n_fft': 1024,  # Number of samples in each fourier transform
                     'fft_hop': 256,  # Number of samples between the start of each fourier transform
                     'n_parallel_readers': 16,
@@ -41,11 +42,12 @@ def cfg():
                     'batch_size': 50,  # Number of patches in each batch
                     'n_shuffle': 1000,  # Number of patches buffered before batching
                     'learning_rate': 0.0001,  # The learning rate to be used by the model
-                    'epochs': 8,  # Number of full passes through the dataset to train for
+                    'epochs': 16,  # Number of full passes through the dataset to train for
                     'normalise_mag': True,  # Are magnitude spectrograms normalised in pre-processing?
                     'GPU': '0',
                     'phase_loss_masking': False,
-                    'phase_loss_approximation': True,
+                    'phase_loss_approximation': False,
+                    'loss_function': 'l1_phase_loss',
                     'chime_data_root': '/home/enterprise.internal.city.ac.uk/acvn728/NewCHiME/',
                     'model_base_dir': '/home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/checkpoints',
                     'log_dir':'logs/ssh'
@@ -113,7 +115,8 @@ def do_experiment(model_config):
     model = audio_models.MagnitudeModel(mixed_input, voice_input, mixed_phase, mixed_audio, voice_audio, background_audio,
                                         is_training, model_config['learning_rate'], model_config['data_type'],
                                         model_config['phase_weight'], model_config['phase_loss_masking'],
-                                        model_config['phase_loss_approximation'], name='Magnitude_Model')
+                                        model_config['phase_loss_approximation'], 'Magnitude_Model',
+                                        model_config['loss_function'])
 
     sess.run(tf.global_variables_initializer())
 
@@ -138,13 +141,14 @@ def do_experiment(model_config):
     model = train(sess, model, model_config, model_folder, handle, training_iterator, training_handle,
                   validation_iterator, validation_handle, writer)
 
-    # Test the trained model
-    mean_test_loss, test_count = test(sess, model, model_config, handle, testing_iterator, testing_handle,
-                                      test_count, experiment_id)
+    if model_config['completion_test']:
+        # Test the trained model
+        mean_test_loss, test_count = test(sess, model, model_config, handle, testing_iterator, testing_handle,
+                                          test_count, experiment_id)
+        if model_config['initialisation_test']:
+            print('\tInitial test loss: {init}'.format(init=initial_test_loss))
+        print('\tFinal test loss: {final}'.format(final=mean_test_loss))
     print('{ts}:\n\tAll done with experiment {exid}!'.format(ts=datetime.datetime.now(), exid=experiment_id))
-    if model_config['initialisation_test']:
-        print('\tInitial test loss: {init}'.format(init=initial_test_loss))
-    print('\tFinal test loss: {final}'.format(final=mean_test_loss))
 
 
 

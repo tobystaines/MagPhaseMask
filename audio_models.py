@@ -20,7 +20,7 @@ class MagnitudeModel(object):
     """
     def __init__(self, mixed_input, voice_input, mixed_phase, mixed_audio, voice_audio, background_audio,
                  is_training, learning_rate, data_type, phase_weight, phase_loss_masking,
-                 phase_loss_approximation, name):
+                 phase_loss_approximation, name, loss_function='l1_phase_loss'):
         with tf.variable_scope(name):
             self.mixed_input = mixed_input
             self.voice_input = voice_input
@@ -46,9 +46,12 @@ class MagnitudeModel(object):
             elif data_type == 'mag_phase':
                 self.gen_voice = self.voice_mask * mixed_input
                 self.mag_loss = mf.l1_loss(self.gen_voice[:, :, :, 0], voice_input[:, :, :, 0])
-                self.phase_loss = mf.l1_phase_loss(self.gen_voice[:, :, :, 1], voice_input[:, :, :, 1],
-                                                   phase_loss_masking, phase_loss_approximation,
-                                                   self.gen_voice[:, :, :, 0]) * phase_weight
+                if loss_function == 'l1_phase_loss':
+                    self.phase_loss = mf.l1_phase_loss(self.gen_voice[:, :, :, 1], voice_input[:, :, :, 1],
+                                                       phase_loss_masking, phase_loss_approximation,
+                                                       self.gen_voice[:, :, :, 0]) * phase_weight
+                elif loss_function == 'l1_loss':
+                    self.phase_loss = mf.l1_loss(self.gen_voice[:, :, :, 1], voice_input[:, :, :, 1])
                 self.cost = (self.mag_loss + self.phase_loss)/2
 
             elif data_type == 'mag_phase_diff2':
