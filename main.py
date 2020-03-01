@@ -27,7 +27,7 @@ def cfg():
                     'completion_test': False,  # Whether ot not to calculate test metrics after training
                     'loading': False,  # Whether to load an existing checkpoint
                     'training': False,
-                    'checkpoint_to_load': "37/37-7",  # Checkpoint format: run/run-step
+                    'checkpoint_to_load': "37/37-16",  # Checkpoint format: run/run-step
                     'saving': True,  # Whether to take checkpoints
                     'save_by_epochs': True,  # Checkpoints at end of each epoch or every 'save_iters'?
                     'save_iters': 10000,  # Number of training iterations between checkpoints
