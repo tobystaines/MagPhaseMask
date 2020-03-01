@@ -5,6 +5,7 @@ from sacred.observers import FileStorageObserver
 
 import os
 import datetime
+import json
 
 import audio_models
 import dataset
@@ -25,7 +26,8 @@ def cfg():
                     'initialisation_test': False,  # Whether or not to calculate test metrics before training
                     'completion_test': False,  # Whether ot not to calculate test metrics after training
                     'loading': False,  # Whether to load an existing checkpoint
-                    'checkpoint_to_load': "1/1-7",  # Checkpoint format: run/run-step
+                    'training': False,
+                    'checkpoint_to_load': "37/37-7",  # Checkpoint format: run/run-step
                     'saving': True,  # Whether to take checkpoints
                     'save_by_epochs': True,  # Checkpoints at end of each epoch or every 'save_iters'?
                     'save_iters': 10000,  # Number of training iterations between checkpoints
@@ -48,7 +50,7 @@ def cfg():
                     'phase_loss_masking': False,
                     'phase_loss_approximation': False,
                     'loss_function': 'l1_phase_loss',
-                    'chime_data_root': '/home/enterprise.internal.city.ac.uk/acvn728/NewCHiME/',
+                    'chime_data_root': '/vol/data/NewCHiME/',
                     'model_base_dir': '/home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/checkpoints',
                     'log_dir':'logs/ssh'
                     }
@@ -56,6 +58,14 @@ def cfg():
 
 @ex.automain
 def do_experiment(model_config):
+
+    if not model_config['training']:
+        config_file_loc = f'my_runs/{model_config["checkpoint_to_load"].split("/")[0]}/config.json'
+        with open(config_file_loc) as config_file:
+            model_config = json.load(config_file)
+            model_config['training'] = False
+            model_config['loading'] = True
+            model_config['completion_test'] = True
 
     tf.reset_default_graph()
     experiment_id = ex.current_run._id
@@ -137,9 +147,10 @@ def do_experiment(model_config):
         initial_test_loss, test_count = test(sess, model, model_config, handle, testing_iterator, testing_handle,
                                              test_count, experiment_id)
 
-    # Train the model
-    model = train(sess, model, model_config, model_folder, handle, training_iterator, training_handle,
-                  validation_iterator, validation_handle, writer)
+    if model_config['training']:
+        # Train the model
+        model = train(sess, model, model_config, model_folder, handle, training_iterator, training_handle,
+                      validation_iterator, validation_handle, writer)
 
     if model_config['completion_test']:
         # Test the trained model
