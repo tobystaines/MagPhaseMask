@@ -4,6 +4,7 @@ import csv
 import pickle
 import shutil
 import datetime
+import pandas as pd
 from glob import glob
 import numpy as np
 import mir_eval
@@ -120,6 +121,9 @@ def get_test_metrics(argv):
             print('{ts}:\t{f} processed.'.format(ts=datetime.datetime.now(), f=file))
 
         #  Record mean results for each metric across all batches in the test
+        full_results = {'sdr': sdrs, 'sirs': sirs, 'sars': sars, 'nsdrs': nsdrs}
+        full_results = pd.DataFrame.from_dict(full_results)
+
         mean_cost = sum(test_costs) / len(test_costs)
         mean_sdr = np.mean(sdrs, axis=0)
         mean_sir = np.mean(sirs, axis=0)
@@ -139,6 +143,7 @@ def get_test_metrics(argv):
         writer.writeheader()
         for test in metrics:
             writer.writerow(test)
+    full_results.to_csv('test_metrics/' + experiment_id + '_full.csv', index=False)
 
     # Delete the pickle files, as they are enormous and no longer needed
     print('Deleting pickle files')
