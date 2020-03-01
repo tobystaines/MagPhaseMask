@@ -108,7 +108,7 @@ def train(sess, model, model_config, model_folder, handle, training_iterator, tr
         real_loss_summary = tf.summary.scalar('Training_real_loss', model.real_loss)
     if 'imag' in model_config['data_type'] and model_config['data_type'] != 'mag_phase_real_imag':
         imag_loss_summary = tf.summary.scalar('Training_imag_loss', model.imag_loss)
-    saver = tf.train.Saver(tf.global_variables(), max_to_keep=5, write_version=tf.train.SaverDef.V2)
+    saver = tf.train.Saver(tf.global_variables(), max_to_keep=model_config['epochs'], write_version=tf.train.SaverDef.V2)
     sess.run(training_iterator.initializer)
     # Begin training loop
     # Train for the specified number of epochs, unless early stopping is triggered
