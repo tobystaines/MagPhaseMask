@@ -60,6 +60,7 @@ def cfg():
 @ex.automain
 def do_experiment(model_config):
 
+    experiment_to_load = None
     if not model_config['training']:
         checkpoint_to_load = model_config['checkpoint_to_load']
         experiment_to_load = checkpoint_to_load.split('/')[0]
@@ -152,7 +153,7 @@ def do_experiment(model_config):
     if model_config['initialisation_test']:
         print('Running initialisation test')
         initial_test_loss, test_count = test(sess, model, model_config, handle, testing_iterator, testing_handle,
-                                             test_count, experiment_id)
+                                             test_count, experiment_id if experiment_to_load is None else experiment_to_load)
 
     if model_config['training']:
         # Train the model
@@ -162,7 +163,7 @@ def do_experiment(model_config):
     if model_config['completion_test']:
         # Test the trained model
         mean_test_loss, test_count = test(sess, model, model_config, handle, testing_iterator, testing_handle,
-                                          test_count, experiment_id)
+                                          test_count, experiment_id if experiment_to_load is None else experiment_to_load)
         if model_config['initialisation_test']:
             print('\tInitial test loss: {init}'.format(init=initial_test_loss))
         print('\tFinal test loss: {final}'.format(final=mean_test_loss))
