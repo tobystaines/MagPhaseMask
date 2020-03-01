@@ -62,10 +62,10 @@ def do_experiment(model_config):
     if not model_config['training']:
         experiment_to_load = model_config['checkpoint_to_load'].split('/')[0]
         print(experiment_to_load)
-        config_file_loc = f"my_runs/{experiment_to_load}/config.json"
+        config_file_loc = "my_runs/{experiment_to_load}/config.json".format(experiment_to_load=experiment_to_load)
         with open(config_file_loc) as config_file:
             model_config = json.load(config_file)
-            print(f'Config file for experiment {experiment_to_load} loaded')
+            print('Config file for experiment {experiment_to_load} loaded'.format(experiment_to_load=experiment_to_load))
             model_config['training'] = False
             model_config['loading'] = True
             model_config['completion_test'] = True
