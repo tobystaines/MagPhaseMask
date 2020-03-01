@@ -64,7 +64,7 @@ def do_experiment(model_config):
         print(experiment_to_load)
         config_file_loc = "my_runs/{experiment_to_load}/config.json".format(experiment_to_load=experiment_to_load)
         with open(config_file_loc) as config_file:
-            model_config = json.load(config_file)
+            model_config = json.load(config_file)['model_config']
             print('Config file for experiment {experiment_to_load} loaded'.format(experiment_to_load=experiment_to_load))
             model_config['training'] = False
             model_config['loading'] = True
