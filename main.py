@@ -51,7 +51,8 @@ def cfg():
                     'phase_loss_approximation': False,
                     'loss_function': 'l1_phase_loss',
                     'chime_data_root': '/vol/data/NewCHiME/',
-                    'model_base_dir': '/home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/checkpoints',
+                    # 'model_base_dir': '/home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/checkpoints',
+                    'model_base_dir': 'checkpoints',
                     'log_dir':'logs/ssh'
                     }
 
@@ -69,7 +70,8 @@ def do_experiment(model_config):
             model_config['training'] = False
             model_config['loading'] = True
             model_config['completion_test'] = True
-
+            model_config['model_base_dir'] = 'checkpoints'
+            
     tf.reset_default_graph()
     experiment_id = ex.current_run._id
     print('Experiment ID: {eid}'.format(eid=experiment_id))
