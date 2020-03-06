@@ -24,10 +24,10 @@ def cfg():
                     'phase_weight': 0.0005,  # When using a model which learns to estimate phase, defines how much
                                             # weight phase loss should be given against magnitude loss
                     'initialisation_test': False,  # Whether or not to calculate test metrics before training
-                    'completion_test': False,  # Whether ot not to calculate test metrics after training
+                    'completion_test': True,  # Whether ot not to calculate test metrics after training
                     'loading': False,  # Whether to load an existing checkpoint
-                    'training': False,
-                    'checkpoint_to_load': "37/37-16",  # Checkpoint format: run/run-step
+                    'training': True,
+                    'checkpoint_to_load': "",  # Checkpoint format: run/run-step
                     'saving': True,  # Whether to take checkpoints
                     'save_by_epochs': True,  # Checkpoints at end of each epoch or every 'save_iters'?
                     'save_iters': 10000,  # Number of training iterations between checkpoints
@@ -53,12 +53,18 @@ def cfg():
                     'chime_data_root': '/vol/data/NewCHiME/',
                     # 'model_base_dir': '/home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/checkpoints',
                     'model_base_dir': 'checkpoints',
-                    'log_dir':'logs/ssh'
+                    'log_dir': 'logs/ssh'
                     }
 
 
 @ex.automain
 def do_experiment(model_config):
+
+    def load_checkpoint(checkpoint_directory, checkpoint):
+        print('Loading checkpoint')
+        checkpoint = os.path.join(checkpoint_directory, checkpoint)
+        restorer = tf.train.Saver()
+        restorer.restore(sess, checkpoint)
 
     experiment_to_load = None
     if not model_config['training']:
@@ -139,10 +145,7 @@ def do_experiment(model_config):
     sess.run(tf.global_variables_initializer())
 
     if model_config['loading']:
-        print('Loading checkpoint')
-        checkpoint = os.path.join(model_config['model_base_dir'], model_config['checkpoint_to_load'])
-        restorer = tf.train.Saver()
-        restorer.restore(sess, checkpoint)
+        load_checkpoint(model_config['model_base_dir'], model_config['checkpoint_to_load'])
 
     # Summaries
     model_folder = str(experiment_id)
@@ -157,10 +160,15 @@ def do_experiment(model_config):
 
     if model_config['training']:
         # Train the model
-        model = train(sess, model, model_config, model_folder, handle, training_iterator, training_handle,
-                      validation_iterator, validation_handle, writer)
-
+        model, min_val_check = train(sess, model, model_config, model_folder, handle, training_iterator, training_handle,
+                                     validation_iterator, validation_handle, writer)
+        model_config['checkpoint_to_load'] = '{exp_id}/{exp_id}-{min_val_check}'.format(
+                exp_id=experiment_id,
+                min_val_check=min_val_check
+            )
     if model_config['completion_test']:
+        # Load the checkpoint with the min validation loss
+        load_checkpoint(model_config['model_base_dir'], model_config['checkpoint_to_load'])
         # Test the trained model
         mean_test_loss, test_count = test(sess, model, model_config, handle, testing_iterator, testing_handle,
                                           test_count, experiment_id if experiment_to_load is None else experiment_to_load)

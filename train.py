@@ -268,5 +268,5 @@ def train(sess, model, model_config, model_folder, handle, training_iterator, tr
     else:
         print('Best validation loss ({mvc}) achieved at validation check {mvck}'.format(mvc=min_val_cost,
                                                                                         mvck=min_val_check))
-    return model
+    return model, min_val_check
 
