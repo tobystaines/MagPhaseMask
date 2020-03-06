@@ -1,0 +1,115 @@
+{
+  "artifacts": [],
+  "command": "do_experiment",
+  "experiment": {
+    "base_dir": "/home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask",
+    "dependencies": [
+      "numpy==1.15.0",
+      "sacred==0.8.1",
+      "tensorflow-gpu==1.13.1"
+    ],
+    "mainfile": "main.py",
+    "name": "UNet_Speech_Separation",
+    "repositories": [
+      {
+        "commit": "6c4ebdd6e018772d9c03c61187268910b5128096",
+        "dirty": false,
+        "url": "https://github.com/tobystaines/MagPhaseMask.git"
+      },
+      {
+        "commit": "6c4ebdd6e018772d9c03c61187268910b5128096",
+        "dirty": false,
+        "url": "https://github.com/tobystaines/MagPhaseMask.git"
+      },
+      {
+        "commit": "6c4ebdd6e018772d9c03c61187268910b5128096",
+        "dirty": false,
+        "url": "https://github.com/tobystaines/MagPhaseMask.git"
+      },
+      {
+        "commit": "6c4ebdd6e018772d9c03c61187268910b5128096",
+        "dirty": false,
+        "url": "https://github.com/tobystaines/MagPhaseMask.git"
+      }
+    ],
+    "sources": [
+      [
+        "audio_models.py",
+        "_sources/audio_models_bdacdbb332015e84e24224862393f3f6.py"
+      ],
+      [
+        "dataset.py",
+        "_sources/dataset_f18a815f3e3465bfee9c68b7ba52fcd5.py"
+      ],
+      [
+        "main.py",
+        "_sources/main_d26cb8f116efa94c2dd1f0f2d023d520.py"
+      ],
+      [
+        "train.py",
+        "_sources/train_caf899dd5a3dd539ae52b8372ee4b114.py"
+      ]
+    ]
+  },
+  "heartbeat": "2020-03-01T13:25:38.212157",
+  "host": {
+    "ENV": {},
+    "cpu": "Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz",
+    "gpus": {
+      "driver_version": "418.87.01",
+      "gpus": [
+        {
+          "model": "Quadro M4000",
+          "persistence_mode": false,
+          "total_memory": 8126
+        },
+        {
+          "model": "Quadro M4000",
+          "persistence_mode": false,
+          "total_memory": 8126
+        }
+      ]
+    },
+    "hostname": "newhaven",
+    "os": [
+      "Linux",
+      "Linux-4.15.0-76-generic-x86_64-with-Ubuntu-16.04-xenial"
+    ],
+    "python_version": "3.5.2"
+  },
+  "meta": {
+    "command": "do_experiment",
+    "options": {
+      "--beat-interval": null,
+      "--capture": null,
+      "--comment": null,
+      "--debug": false,
+      "--enforce_clean": false,
+      "--file_storage": null,
+      "--force": false,
+      "--help": false,
+      "--loglevel": null,
+      "--mongo_db": null,
+      "--name": null,
+      "--pdb": false,
+      "--print-config": false,
+      "--priority": null,
+      "--queue": false,
+      "--s3": null,
+      "--sql": null,
+      "--tiny_db": null,
+      "--unobserved": false,
+      "COMMAND": null,
+      "UPDATE": [
+        "model_config.model_base_dir=checkpoints"
+      ],
+      "help": false,
+      "with": true
+    }
+  },
+  "resources": [],
+  "result": null,
+  "start_time": "2020-03-01T13:25:28.206548",
+  "status": "INTERRUPTED",
+  "stop_time": "2020-03-01T13:25:38.220515"
+}

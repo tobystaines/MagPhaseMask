@@ -1,0 +1,132 @@
+{
+  "artifacts": [],
+  "command": "do_experiment",
+  "experiment": {
+    "base_dir": "/home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask",
+    "dependencies": [
+      "numpy==1.15.4",
+      "sacred==0.8.1",
+      "tensorflow-gpu==1.13.1"
+    ],
+    "mainfile": "main.py",
+    "name": "UNet_Speech_Separation",
+    "repositories": [
+      {
+        "commit": "740b81caf5095e5553dd0718b8bbad0785005f80",
+        "dirty": false,
+        "url": "https://github.com/tobystaines/MagPhaseMask.git"
+      },
+      {
+        "commit": "740b81caf5095e5553dd0718b8bbad0785005f80",
+        "dirty": false,
+        "url": "https://github.com/tobystaines/MagPhaseMask.git"
+      },
+      {
+        "commit": "740b81caf5095e5553dd0718b8bbad0785005f80",
+        "dirty": false,
+        "url": "https://github.com/tobystaines/MagPhaseMask.git"
+      },
+      {
+        "commit": "740b81caf5095e5553dd0718b8bbad0785005f80",
+        "dirty": false,
+        "url": "https://github.com/tobystaines/MagPhaseMask.git"
+      }
+    ],
+    "sources": [
+      [
+        "audio_models.py",
+        "_sources/audio_models_bdacdbb332015e84e24224862393f3f6.py"
+      ],
+      [
+        "dataset.py",
+        "_sources/dataset_f18a815f3e3465bfee9c68b7ba52fcd5.py"
+      ],
+      [
+        "main.py",
+        "_sources/main_f9bf715da49d5dd230a30942c263401c.py"
+      ],
+      [
+        "train.py",
+        "_sources/train_caf899dd5a3dd539ae52b8372ee4b114.py"
+      ]
+    ]
+  },
+  "fail_trace": [
+    "Traceback (most recent call last):\n",
+    "  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/tensorflow/python/client/session.py\", line 1334, in _do_call\n    return fn(*args)\n",
+    "  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/tensorflow/python/client/session.py\", line 1319, in _run_fn\n    options, feed_dict, fetch_list, target_list, run_metadata)\n",
+    "  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/tensorflow/python/client/session.py\", line 1407, in _call_tf_sessionrun\n    run_metadata)\n",
+    "tensorflow.python.framework.errors_impl.UnknownError: Failed to get convolution algorithm. This is probably because cuDNN failed to initialize, so try looking to see if a warning log message was printed above.\n\t [[{{node Magnitude_Model/voice-mask-unet/encoder/layer-1/conv2d/Conv2D}}]]\n\t [[{{node Magnitude_Model/truediv}}]]\n",
+    "\nDuring handling of the above exception, another exception occurred:\n\n",
+    "Traceback (most recent call last):\n",
+    "  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/sacred/config/captured_function.py\", line 42, in captured_function\n    result = wrapped(*args, **kwargs)\n",
+    "  File \"main.py\", line 142, in do_experiment\n    validation_iterator, validation_handle, writer)\n",
+    "  File \"/home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/train.py\", line 132, in train\n    {model.is_training: True, handle: training_handle})\n",
+    "  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/tensorflow/python/client/session.py\", line 929, in run\n    run_metadata_ptr)\n",
+    "  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/tensorflow/python/client/session.py\", line 1152, in _run\n    feed_dict_tensor, options, run_metadata)\n",
+    "  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/tensorflow/python/client/session.py\", line 1328, in _do_run\n    run_metadata)\n",
+    "  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/tensorflow/python/client/session.py\", line 1348, in _do_call\n    raise type(e)(node_def, op, message)\n",
+    "tensorflow.python.framework.errors_impl.UnknownError: Failed to get convolution algorithm. This is probably because cuDNN failed to initialize, so try looking to see if a warning log message was printed above.\n\t [[node Magnitude_Model/voice-mask-unet/encoder/layer-1/conv2d/Conv2D (defined at /home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/model_functions.py:15) ]]\n\t [[node Magnitude_Model/truediv (defined at /home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/audio_models.py:55) ]]\n\nCaused by op 'Magnitude_Model/voice-mask-unet/encoder/layer-1/conv2d/Conv2D', defined at:\n  File \"main.py\", line 57, in <module>\n    @ex.automain\n  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/sacred/experiment.py\", line 190, in automain\n    self.run_commandline()\n  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/sacred/experiment.py\", line 318, in run_commandline\n    options=args,\n  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/sacred/experiment.py\", line 276, in run\n    run()\n  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/sacred/run.py\", line 238, in __call__\n    self.result = self.main_function(*args)\n  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/sacred/config/captured_function.py\", line 42, in captured_function\n    result = wrapped(*args, **kwargs)\n  File \"main.py\", line 119, in do_experiment\n    model_config['loss_function'])\n  File \"/home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/audio_models.py\", line 37, in __init__\n    self.voice_mask_network = UNet(mixed_input, data_type, is_training=is_training, reuse=False, name='voice-mask-unet')\n  File \"/home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/audio_models.py\", line 133, in __init__\n    self.encoder = UNetEncoder(input_tensor, is_training, reuse)\n  File \"/home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/audio_models.py\", line 148, in __init__\n    net = mf.conv(self.input_tensor, filters=16, kernel_size=5, stride=(2, 2))\n  File \"/home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/model_functions.py\", line 15, in conv\n    strides=stride, padding='SAME')\n  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/tensorflow/python/util/deprecation.py\", line 324, in new_func\n    return func(*args, **kwargs)\n  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/tensorflow/python/layers/convolutional.py\", line 424, in conv2d\n    return layer.apply(inputs)\n  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/tensorflow/python/keras/engine/base_layer.py\", line 1227, in apply\n    return self.__call__(inputs, *args, **kwargs)\n  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/tensorflow/python/layers/base.py\", line 530, in __call__\n    outputs = super(Layer, self).__call__(inputs, *args, **kwargs)\n  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/tensorflow/python/keras/engine/base_layer.py\", line 554, in __call__\n    outputs = self.call(inputs, *args, **kwargs)\n  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/tensorflow/python/keras/layers/convolutional.py\", line 194, in call\n    outputs = self._convolution_op(inputs, self.kernel)\n  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/tensorflow/python/ops/nn_ops.py\", line 966, in __call__\n    return self.conv_op(inp, filter)\n  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/tensorflow/python/ops/nn_ops.py\", line 591, in __call__\n    return self.call(inp, filter)\n  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/tensorflow/python/ops/nn_ops.py\", line 208, in __call__\n    name=self.name)\n  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/tensorflow/python/ops/gen_nn_ops.py\", line 1026, in conv2d\n    data_format=data_format, dilations=dilations, name=name)\n  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/tensorflow/python/framework/op_def_library.py\", line 788, in _apply_op_helper\n    op_def=op_def)\n  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/tensorflow/python/util/deprecation.py\", line 507, in new_func\n    return func(*args, **kwargs)\n  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/tensorflow/python/framework/ops.py\", line 3300, in create_op\n    op_def=op_def)\n  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/tensorflow/python/framework/ops.py\", line 1801, in __init__\n    self._traceback = tf_stack.extract_stack()\n\nUnknownError (see above for traceback): Failed to get convolution algorithm. This is probably because cuDNN failed to initialize, so try looking to see if a warning log message was printed above.\n\t [[node Magnitude_Model/voice-mask-unet/encoder/layer-1/conv2d/Conv2D (defined at /home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/model_functions.py:15) ]]\n\t [[node Magnitude_Model/truediv (defined at /home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/audio_models.py:55) ]]\n\n"
+  ],
+  "heartbeat": "2020-02-23T15:10:41.505997",
+  "host": {
+    "ENV": {},
+    "cpu": "Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz",
+    "gpus": {
+      "driver_version": "418.87.01",
+      "gpus": [
+        {
+          "model": "TITAN V",
+          "persistence_mode": false,
+          "total_memory": 12036
+        },
+        {
+          "model": "TITAN V",
+          "persistence_mode": false,
+          "total_memory": 12036
+        }
+      ]
+    },
+    "hostname": "fairlight",
+    "os": [
+      "Linux",
+      "Linux-4.15.0-76-generic-x86_64-with-Ubuntu-16.04-xenial"
+    ],
+    "python_version": "3.5.2"
+  },
+  "meta": {
+    "command": "do_experiment",
+    "options": {
+      "--beat-interval": null,
+      "--capture": null,
+      "--comment": null,
+      "--debug": false,
+      "--enforce_clean": false,
+      "--file_storage": null,
+      "--force": false,
+      "--help": false,
+      "--loglevel": null,
+      "--mongo_db": null,
+      "--name": null,
+      "--pdb": false,
+      "--print-config": false,
+      "--priority": null,
+      "--queue": false,
+      "--s3": null,
+      "--sql": null,
+      "--tiny_db": null,
+      "--unobserved": false,
+      "COMMAND": null,
+      "UPDATE": [
+        "model_config.chime_data_root=/vol/data/NewCHiME/"
+      ],
+      "help": false,
+      "with": true
+    }
+  },
+  "resources": [],
+  "result": null,
+  "start_time": "2020-02-23T15:08:30.672830",
+  "status": "FAILED",
+  "stop_time": "2020-02-23T15:10:41.552337"
+}

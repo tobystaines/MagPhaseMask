@@ -1,0 +1,125 @@
+{
+  "artifacts": [],
+  "command": "do_experiment",
+  "experiment": {
+    "base_dir": "/home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask",
+    "dependencies": [
+      "numpy==1.15.0",
+      "sacred==0.8.1",
+      "tensorflow-gpu==1.13.1"
+    ],
+    "mainfile": "main.py",
+    "name": "UNet_Speech_Separation",
+    "repositories": [
+      {
+        "commit": "263cc5163c7e51b2346c4a2d7b1ce7e15739889f",
+        "dirty": false,
+        "url": "https://github.com/tobystaines/MagPhaseMask.git"
+      },
+      {
+        "commit": "263cc5163c7e51b2346c4a2d7b1ce7e15739889f",
+        "dirty": false,
+        "url": "https://github.com/tobystaines/MagPhaseMask.git"
+      },
+      {
+        "commit": "263cc5163c7e51b2346c4a2d7b1ce7e15739889f",
+        "dirty": false,
+        "url": "https://github.com/tobystaines/MagPhaseMask.git"
+      },
+      {
+        "commit": "263cc5163c7e51b2346c4a2d7b1ce7e15739889f",
+        "dirty": false,
+        "url": "https://github.com/tobystaines/MagPhaseMask.git"
+      }
+    ],
+    "sources": [
+      [
+        "audio_models.py",
+        "_sources/audio_models_bdacdbb332015e84e24224862393f3f6.py"
+      ],
+      [
+        "dataset.py",
+        "_sources/dataset_f18a815f3e3465bfee9c68b7ba52fcd5.py"
+      ],
+      [
+        "main.py",
+        "_sources/main_6a0f8d763085f68456289b29bbb862e1.py"
+      ],
+      [
+        "train.py",
+        "_sources/train_caf899dd5a3dd539ae52b8372ee4b114.py"
+      ]
+    ]
+  },
+  "fail_trace": [
+    "Traceback (most recent call last):\n",
+    "  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/sacred/config/captured_function.py\", line 42, in captured_function\n    result = wrapped(*args, **kwargs)\n",
+    "  File \"main.py\", line 142, in do_experiment\n    restorer.restore(sess, checkpoint)\n",
+    "  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/tensorflow/python/training/saver.py\", line 1266, in restore\n    if not checkpoint_management.checkpoint_exists(compat.as_text(save_path)):\n",
+    "  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/tensorflow/python/util/deprecation.py\", line 324, in new_func\n    return func(*args, **kwargs)\n",
+    "  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/tensorflow/python/training/checkpoint_management.py\", line 372, in checkpoint_exists\n    if file_io.get_matching_files(pathname):\n",
+    "  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/tensorflow/python/lib/io/file_io.py\", line 361, in get_matching_files\n    return get_matching_files_v2(filename)\n",
+    "  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/tensorflow/python/lib/io/file_io.py\", line 389, in get_matching_files_v2\n    for single_filename in pattern\n",
+    "  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/tensorflow/python/framework/errors_impl.py\", line 528, in __exit__\n    c_api.TF_GetCode(self.status.status))\n",
+    "tensorflow.python.framework.errors_impl.NotFoundError: checkpoints/1; No such file or directory\n"
+  ],
+  "heartbeat": "2020-03-01T13:30:19.931928",
+  "host": {
+    "ENV": {},
+    "cpu": "Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz",
+    "gpus": {
+      "driver_version": "418.87.01",
+      "gpus": [
+        {
+          "model": "Quadro M4000",
+          "persistence_mode": false,
+          "total_memory": 8126
+        },
+        {
+          "model": "Quadro M4000",
+          "persistence_mode": false,
+          "total_memory": 8126
+        }
+      ]
+    },
+    "hostname": "newhaven",
+    "os": [
+      "Linux",
+      "Linux-4.15.0-76-generic-x86_64-with-Ubuntu-16.04-xenial"
+    ],
+    "python_version": "3.5.2"
+  },
+  "meta": {
+    "command": "do_experiment",
+    "options": {
+      "--beat-interval": null,
+      "--capture": null,
+      "--comment": null,
+      "--debug": false,
+      "--enforce_clean": false,
+      "--file_storage": null,
+      "--force": false,
+      "--help": false,
+      "--loglevel": null,
+      "--mongo_db": null,
+      "--name": null,
+      "--pdb": false,
+      "--print-config": false,
+      "--priority": null,
+      "--queue": false,
+      "--s3": null,
+      "--sql": null,
+      "--tiny_db": null,
+      "--unobserved": false,
+      "COMMAND": null,
+      "UPDATE": [],
+      "help": false,
+      "with": false
+    }
+  },
+  "resources": [],
+  "result": null,
+  "start_time": "2020-03-01T13:28:26.649286",
+  "status": "FAILED",
+  "stop_time": "2020-03-01T13:30:19.939128"
+}
