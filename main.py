@@ -26,7 +26,7 @@ def cfg():
                     'initialisation_test': False,  # Whether or not to calculate test metrics before training
                     'completion_test': True,  # Whether ot not to calculate test metrics after training
                     'loading': False,  # Whether to load an existing checkpoint
-                    'training': False,
+                    'training': True,
                     'checkpoint_to_load': "53/53-7",  # Checkpoint format: run/run-step
                     'saving': True,  # Whether to take checkpoints
                     'save_by_epochs': True,  # Checkpoints at end of each epoch or every 'save_iters'?
@@ -49,7 +49,7 @@ def cfg():
                     'GPU': '0',
                     'phase_loss_masking': False,
                     'phase_loss_approximation': False,
-                    'loss_function': 'l1_phase_loss',
+                    'loss_function': 'l1_loss',
                     'chime_data_root': '/vol/data/NewCHiME/',
                     # 'model_base_dir': '/home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/checkpoints',
                     'model_base_dir': 'checkpoints',
