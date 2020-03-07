@@ -25,9 +25,9 @@ def cfg():
                                             # weight phase loss should be given against magnitude loss
                     'initialisation_test': False,  # Whether or not to calculate test metrics before training
                     'completion_test': True,  # Whether ot not to calculate test metrics after training
-                    'loading': False,  # Whether to load an existing checkpoint
-                    'training': True,
-                    'checkpoint_to_load': "53/53-7",  # Checkpoint format: run/run-step
+                    'loading': True,  # Whether to load an existing checkpoint
+                    'training': False,
+                    'checkpoint_to_load': "57/57-7",  # Checkpoint format: run/run-step
                     'saving': True,  # Whether to take checkpoints
                     'save_by_epochs': True,  # Checkpoints at end of each epoch or every 'save_iters'?
                     'save_iters': 10000,  # Number of training iterations between checkpoints
@@ -67,9 +67,8 @@ def do_experiment(model_config):
         restorer.restore(sess, checkpoint)
 
     checkpoint_to_load = model_config['checkpoint_to_load']
-
+    experiment_to_load = checkpoint_to_load.split('/')[0]
     if not model_config['training']:
-        experiment_to_load = checkpoint_to_load.split('/')[0]
         print(experiment_to_load)
         config_file_loc = "my_runs/{experiment_to_load}/config.json".format(experiment_to_load=experiment_to_load)
         with open(config_file_loc) as config_file:
