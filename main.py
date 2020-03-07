@@ -26,8 +26,8 @@ def cfg():
                     'initialisation_test': False,  # Whether or not to calculate test metrics before training
                     'completion_test': True,  # Whether ot not to calculate test metrics after training
                     'loading': False,  # Whether to load an existing checkpoint
-                    'training': True,
-                    'checkpoint_to_load': "",  # Checkpoint format: run/run-step
+                    'training': False,
+                    'checkpoint_to_load': "53/53-7",  # Checkpoint format: run/run-step
                     'saving': True,  # Whether to take checkpoints
                     'save_by_epochs': True,  # Checkpoints at end of each epoch or every 'save_iters'?
                     'save_iters': 10000,  # Number of training iterations between checkpoints
@@ -38,7 +38,7 @@ def cfg():
                     'sample_rate': 16000,  # Desired sample rate of audio. Input will be resampled to this
                     'n_fft': 1024,  # Number of samples in each fourier transform
                     'fft_hop': 256,  # Number of samples between the start of each fourier transform
-                    'n_parallel_readers': 16,
+                    'n_parallel_readers': 24,
                     'patch_window': 256,  # Number of fourier transforms (rows) in each patch
                     'patch_hop': 128,  # Number of fourier transforms between the start of each patch
                     'batch_size': 50,  # Number of patches in each batch
@@ -66,9 +66,9 @@ def do_experiment(model_config):
         restorer = tf.train.Saver()
         restorer.restore(sess, checkpoint)
 
-    experiment_to_load = None
+    checkpoint_to_load = model_config['checkpoint_to_load']
+
     if not model_config['training']:
-        checkpoint_to_load = model_config['checkpoint_to_load']
         experiment_to_load = checkpoint_to_load.split('/')[0]
         print(experiment_to_load)
         config_file_loc = "my_runs/{experiment_to_load}/config.json".format(experiment_to_load=experiment_to_load)
@@ -145,7 +145,7 @@ def do_experiment(model_config):
     sess.run(tf.global_variables_initializer())
 
     if model_config['loading']:
-        load_checkpoint(model_config['model_base_dir'], model_config['checkpoint_to_load'])
+        load_checkpoint(model_config['model_base_dir'], checkpoint_to_load)
 
     # Summaries
     model_folder = str(experiment_id)
@@ -162,13 +162,13 @@ def do_experiment(model_config):
         # Train the model
         model, min_val_check = train(sess, model, model_config, model_folder, handle, training_iterator, training_handle,
                                      validation_iterator, validation_handle, writer)
-        model_config['checkpoint_to_load'] = '{exp_id}/{exp_id}-{min_val_check}'.format(
+        checkpoint_to_load = '{exp_id}/{exp_id}-{min_val_check}'.format(
                 exp_id=experiment_id,
                 min_val_check=min_val_check
             )
     if model_config['completion_test']:
         # Load the checkpoint with the min validation loss
-        load_checkpoint(model_config['model_base_dir'], model_config['checkpoint_to_load'])
+        load_checkpoint(model_config['model_base_dir'], checkpoint_to_load)
         # Test the trained model
         mean_test_loss, test_count = test(sess, model, model_config, handle, testing_iterator, testing_handle,
                                           test_count, experiment_id if experiment_to_load is None else experiment_to_load)
