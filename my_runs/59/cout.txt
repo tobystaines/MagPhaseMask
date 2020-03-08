@@ -1,0 +1,105 @@
+INFO - UNet_Speech_Separation - Running command 'do_experiment'
+INFO - UNet_Speech_Separation - Started run with ID "59"
+57
+Config file for experiment 57 loaded
+Experiment ID: 59
+Preparing dataset
+WARNING:tensorflow:From /home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/audio_functions.py:33: py_func (from tensorflow.python.ops.script_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+tf.py_func is deprecated in TF V2. Instead, use
+    tf.py_function, which takes a python function which manipulates tf eager
+    tensors instead of numpy arrays. It's easy to convert a tf eager tensor to
+    an ndarray (just call tensor.numpy()) but having access to eager tensors
+    means `tf.py_function`s can use accelerators such as GPUs as well as
+    being differentiable using a gradient tape.
+    
+WARNING - tensorflow - From /home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/audio_functions.py:33: py_func (from tensorflow.python.ops.script_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+tf.py_func is deprecated in TF V2. Instead, use
+    tf.py_function, which takes a python function which manipulates tf eager
+    tensors instead of numpy arrays. It's easy to convert a tf eager tensor to
+    an ndarray (just call tensor.numpy()) but having access to eager tensors
+    means `tf.py_function`s can use accelerators such as GPUs as well as
+    being differentiable using a gradient tape.
+    
+Dataset ready
+2020-03-07 18:50:11.873258: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-03-07 18:50:12.123668: I tensorflow/compiler/xla/service/service.cc:150] XLA service 0x83ac3c0 executing computations on platform CUDA. Devices:
+2020-03-07 18:50:12.123742: I tensorflow/compiler/xla/service/service.cc:158]   StreamExecutor device (0): Quadro M4000, Compute Capability 5.2
+2020-03-07 18:50:12.123754: I tensorflow/compiler/xla/service/service.cc:158]   StreamExecutor device (1): Quadro M4000, Compute Capability 5.2
+2020-03-07 18:50:12.153098: I tensorflow/core/platform/profile_utils/cpu_utils.cc:94] CPU Frequency: 2197320000 Hz
+2020-03-07 18:50:12.157972: I tensorflow/compiler/xla/service/service.cc:150] XLA service 0x840f180 executing computations on platform Host. Devices:
+2020-03-07 18:50:12.158026: I tensorflow/compiler/xla/service/service.cc:158]   StreamExecutor device (0): <undefined>, <undefined>
+2020-03-07 18:50:12.158352: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1433] Found device 0 with properties: 
+name: Quadro M4000 major: 5 minor: 2 memoryClockRate(GHz): 0.7725
+pciBusID: 0000:84:00.0
+totalMemory: 7.94GiB freeMemory: 7.81GiB
+2020-03-07 18:50:12.158378: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1512] Adding visible gpu devices: 0
+2020-03-07 18:50:12.161669: I tensorflow/core/common_runtime/gpu/gpu_device.cc:984] Device interconnect StreamExecutor with strength 1 edge matrix:
+2020-03-07 18:50:12.161705: I tensorflow/core/common_runtime/gpu/gpu_device.cc:990]      0 
+2020-03-07 18:50:12.161718: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1003] 0:   N 
+2020-03-07 18:50:12.161910: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 7600 MB memory) -> physical GPU (device: 0, name: Quadro M4000, pci bus id: 0000:84:00.0, compute capability: 5.2)
+Session started
+WARNING:tensorflow:From /home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/tensorflow/python/data/ops/dataset_ops.py:1419: colocate_with (from tensorflow.python.framework.ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Colocations handled automatically by placer.
+WARNING - tensorflow - From /home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/tensorflow/python/data/ops/dataset_ops.py:1419: colocate_with (from tensorflow.python.framework.ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+Colocations handled automatically by placer.
+Iterators created
+Creating model
+WARNING:tensorflow:From /home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/model_functions.py:15: conv2d (from tensorflow.python.layers.convolutional) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.conv2d instead.
+WARNING - tensorflow - From /home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/model_functions.py:15: conv2d (from tensorflow.python.layers.convolutional) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.conv2d instead.
+
+WARNING: The TensorFlow contrib module will not be included in TensorFlow 2.0.
+For more information, please see:
+  * https://github.com/tensorflow/community/blob/master/rfcs/20180907-contrib-sunset.md
+  * https://github.com/tensorflow/addons
+If you depend on functionality not listed there, please file an issue.
+
+WARNING:tensorflow:From /home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/model_functions.py:25: conv2d_transpose (from tensorflow.python.layers.convolutional) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.conv2d_transpose instead.
+WARNING - tensorflow - From /home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/model_functions.py:25: conv2d_transpose (from tensorflow.python.layers.convolutional) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use keras.layers.conv2d_transpose instead.
+WARNING:tensorflow:From /home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/model_functions.py:44: calling dropout (from tensorflow.python.ops.nn_ops) with keep_prob is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `rate` instead of `keep_prob`. Rate should be set to `rate = 1 - keep_prob`.
+WARNING - tensorflow - From /home/enterprise.internal.city.ac.uk/acvn728/MagPhaseMask/model_functions.py:44: calling dropout (from tensorflow.python.ops.nn_ops) with keep_prob is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `rate` instead of `keep_prob`. Rate should be set to `rate = 1 - keep_prob`.
+Loading checkpoint
+WARNING:tensorflow:From /home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/tensorflow/python/training/saver.py:1266: checkpoint_exists (from tensorflow.python.training.checkpoint_management) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use standard file APIs to check for files with this prefix.
+WARNING - tensorflow - From /home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/tensorflow/python/training/saver.py:1266: checkpoint_exists (from tensorflow.python.training.checkpoint_management) is deprecated and will be removed in a future version.
+Instructions for updating:
+Use standard file APIs to check for files with this prefix.
+INFO:tensorflow:Restoring parameters from checkpoints/57/57-7
+INFO - tensorflow - Restoring parameters from checkpoints/57/57-7
+Loading checkpoint
+INFO:tensorflow:Restoring parameters from checkpoints/57/57-7
+INFO - tensorflow - Restoring parameters from checkpoints/57/57-7
+Starting testing
+2020-03-07 18:50:24.734987:	Entering test loop
+2020-03-07 18:50:35.417420: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:101] Filling up shuffle buffer (this may take a while): 542 of 1000
+2020-03-07 18:50:44.287322: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:140] Shuffle buffer filled.
+2020-03-07 18:50:50.553788:	Testing iteration: 0, Loss: 0.6682186126708984
+2020-03-07 18:53:19.790824: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:101] Filling up shuffle buffer (this may take a while): 578 of 1000
+2020-03-07 18:53:27.288317: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:140] Shuffle buffer filled.
+2020-03-07 18:55:58.752612: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:101] Filling up shuffle buffer (this may take a while): 650 of 1000
+2020-03-07 18:56:03.986814: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:140] Shuffle buffer filled.
+2020-03-07 18:58:34.949605: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:101] Filling up shuffle buffer (this may take a while): 672 of 1000
+2020-03-07 18:58:39.924791: I tensorflow/core/kernels/data/shuffle_dataset_op.cc:140] Shuffle buffer filled.
+2020-03-07 18:59:15.326480:	Testing iteration: 200, Loss: 0.6459764242172241
+Test pass complete
+Mean loss over test set: 0.665546209100754
+Data saved to dumps/57 for later audio metric calculation
+	Final test loss: 0.665546209100754
+2020-03-07 19:00:59.882960:
+	All done with experiment 59!
