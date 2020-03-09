@@ -121,19 +121,28 @@ def get_test_metrics(argv):
             print('{ts}:\t{f} processed.'.format(ts=datetime.datetime.now(), f=file))
 
         #  Record mean results for each metric across all batches in the test
-        full_results = {'sdr': sdrs, 'sirs': sirs, 'sars': sars, 'nsdrs': nsdrs}
-        print(full_results)
-        full_results = pd.DataFrame.from_dict(full_results)
-        full_results.to_csv('test_metrics/' + experiment_id + '_full.csv', index=False)
+
 
         mean_cost = sum(test_costs) / len(test_costs)
         mean_sdr = np.mean(sdrs, axis=0)
         mean_sir = np.mean(sirs, axis=0)
         mean_sar = np.mean(sars, axis=0)
         mean_nsdr = sum(nsdrs) / len(nsdrs)
+
+
+        full_results = {}
         for (k, v) in (('voice', 0), ('background', 1)):
             metrics.append({'test': str(test) + '_' + k, 'mean_cost': mean_cost, 'mean_sdr': mean_sdr[v],
                             'mean_sir': mean_sir[v], 'mean_sar': mean_sar[v], 'mean_nsdr': mean_nsdr[v]})
+            full_results.update({
+                'sdr_{k}'.format(k=k): sdrs[:, v],
+                'sirs_{k}'.format(k=k): sirs[:, v],
+                'sars_{k}'.format(k=k): sars[:, v],
+                'nsdrs_{k}'.format(k=k): nsdrs[:, v]
+            })
+            print(full_results)
+        full_results = pd.DataFrame.from_dict(full_results)
+        full_results.to_csv('test_metrics/' + experiment_id + '_full.csv', index=False)
 
     #  Write the results from the experiment to a CSV file, one row per test
     if not os.path.isdir('test_metrics'):
