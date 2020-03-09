@@ -12,23 +12,23 @@
     "name": "UNet_Speech_Separation",
     "repositories": [
       {
-        "commit": "cddb94f894b2cabfe2e7861b70194570f00b22bd",
-        "dirty": false,
+        "commit": "204cf719ceca45e498c48c3bea0888806a4f3a75",
+        "dirty": true,
         "url": "https://github.com/tobystaines/MagPhaseMask.git"
       },
       {
-        "commit": "cddb94f894b2cabfe2e7861b70194570f00b22bd",
-        "dirty": false,
+        "commit": "204cf719ceca45e498c48c3bea0888806a4f3a75",
+        "dirty": true,
         "url": "https://github.com/tobystaines/MagPhaseMask.git"
       },
       {
-        "commit": "cddb94f894b2cabfe2e7861b70194570f00b22bd",
-        "dirty": false,
+        "commit": "204cf719ceca45e498c48c3bea0888806a4f3a75",
+        "dirty": true,
         "url": "https://github.com/tobystaines/MagPhaseMask.git"
       },
       {
-        "commit": "cddb94f894b2cabfe2e7861b70194570f00b22bd",
-        "dirty": false,
+        "commit": "204cf719ceca45e498c48c3bea0888806a4f3a75",
+        "dirty": true,
         "url": "https://github.com/tobystaines/MagPhaseMask.git"
       }
     ],
@@ -43,7 +43,7 @@
       ],
       [
         "main.py",
-        "_sources/main_a5b2f81305f41ddca858c806b31b1b0c.py"
+        "_sources/main_2edfca9f3fd92ba15e694333ac8595eb.py"
       ],
       [
         "train.py",
@@ -51,14 +51,7 @@
       ]
     ]
   },
-  "fail_trace": [
-    "Traceback (most recent call last):\n",
-    "  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/sacred/config/captured_function.py\", line 42, in captured_function\n    result = wrapped(*args, **kwargs)\n",
-    "  File \"main.py\", line 167, in do_experiment\n    min_val_check=min_val_check\n",
-    "  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/sacred/config/custom_containers.py\", line 173, in _readonly\n    raise SacredError(self.message, filter_traceback=\"always\")\n",
-    "sacred.utils.SacredError: The configuration is read-only in a captured function!\n"
-  ],
-  "heartbeat": "2020-03-06T14:22:23.033069",
+  "heartbeat": "2020-03-07T19:01:00.057492",
   "host": {
     "ENV": {},
     "cpu": "Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz",
@@ -108,7 +101,7 @@
       "--unobserved": false,
       "COMMAND": null,
       "UPDATE": [
-        "model_config.n_parallel_readers=24"
+        "model_config.GPU=0"
       ],
       "help": false,
       "with": true
@@ -116,7 +109,7 @@
   },
   "resources": [],
   "result": null,
-  "start_time": "2020-03-06T09:29:10.027730",
-  "status": "FAILED",
-  "stop_time": "2020-03-06T14:22:23.039619"
+  "start_time": "2020-03-07T18:48:19.502864",
+  "status": "COMPLETED",
+  "stop_time": "2020-03-07T19:01:00.053054"
 }

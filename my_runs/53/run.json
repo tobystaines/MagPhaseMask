@@ -51,7 +51,14 @@
       ]
     ]
   },
-  "heartbeat": "2020-03-06T09:29:31.535775",
+  "fail_trace": [
+    "Traceback (most recent call last):\n",
+    "  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/sacred/config/captured_function.py\", line 42, in captured_function\n    result = wrapped(*args, **kwargs)\n",
+    "  File \"main.py\", line 167, in do_experiment\n    min_val_check=min_val_check\n",
+    "  File \"/home/enterprise.internal.city.ac.uk/acvn728/.local/lib/python3.5/site-packages/sacred/config/custom_containers.py\", line 173, in _readonly\n    raise SacredError(self.message, filter_traceback=\"always\")\n",
+    "sacred.utils.SacredError: The configuration is read-only in a captured function!\n"
+  ],
+  "heartbeat": "2020-03-06T14:54:07.557707",
   "host": {
     "ENV": {},
     "cpu": "Intel(R) Xeon(R) CPU E5-2650 v4 @ 2.20GHz",
@@ -111,5 +118,6 @@
   "resources": [],
   "result": null,
   "start_time": "2020-03-06T09:28:30.964917",
-  "status": "RUNNING"
+  "status": "FAILED",
+  "stop_time": "2020-03-06T14:54:07.565331"
 }
