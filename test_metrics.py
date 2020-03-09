@@ -122,7 +122,9 @@ def get_test_metrics(argv):
 
         #  Record mean results for each metric across all batches in the test
         full_results = {'sdr': sdrs, 'sirs': sirs, 'sars': sars, 'nsdrs': nsdrs}
+        print(full_results)
         full_results = pd.DataFrame.from_dict(full_results)
+        full_results.to_csv('test_metrics/' + experiment_id + '_full.csv', index=False)
 
         mean_cost = sum(test_costs) / len(test_costs)
         mean_sdr = np.mean(sdrs, axis=0)
@@ -143,7 +145,7 @@ def get_test_metrics(argv):
         writer.writeheader()
         for test in metrics:
             writer.writerow(test)
-    full_results.to_csv('test_metrics/' + experiment_id + '_full.csv', index=False)
+
 
     # Delete the pickle files, as they are enormous and no longer needed
     print('Deleting pickle files')
